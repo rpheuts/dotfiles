@@ -107,3 +107,12 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
 - **Host Separation**:
   - `modules/llm.nix` is only imported on `hosts/flow-z13/`. Other hosts omit it to avoid heavy compute overhead.
 
+## 9. Gaming & Steam Stack (`modules/gaming.nix`)
+- **Module**: `modules/gaming.nix` (imported in `hosts/flow-z13/default.nix`).
+- **Steam**: Sandboxed bubblewrap FHS environment with 32-bit graphics support, local network transfer, and remote play firewall configurations.
+- **Proton Compatibility**: `pkgs.proton-ge-bin` (GE-Proton) pre-installed into Steam compatibility tools, plus `protonup-qt` GUI for managing versions and `protontricks`.
+- **Gamescope Session & Micro-Compositor**: `programs.gamescope` enabled with `capSysNice = true` for isolated Wayland scaling, FSR, and optional Big Picture session in greeter.
+- **GameMode**: `programs.gamemode` enabled with renicing support (`gamemoderun <game>`).
+- **Controller Support**: `hardware.steam-hardware.enable = true` providing udev rules for Steam, Xbox, PlayStation, and Switch controllers.
+- **Performance HUD**: `mangohud` available (`mangohud <game>`).
+

@@ -5,7 +5,7 @@
 - **Declarative System Management & Dotfiles**:
   - Central repository: `~/dotfiles` (Git-tracked dotfiles and multi-host NixOS configuration with Flakes).
   - Multi-host setup: `hosts/flow-z13` (Strix Halo 128GB unified RAM), `hosts/template` (other machines).
-  - Modules: `modules/common.nix`, `modules/desktop.nix`, `modules/llm.nix` (Vulkan local AI stack).
+  - Modules: `modules/common.nix`, `modules/desktop.nix`, `modules/llm.nix` (Vulkan local AI stack), `modules/gaming.nix` (Steam, Gamescope, GameMode).
   - Rebuild command: `sudo nixos-rebuild switch --flake ~/dotfiles` (or `sudo nixos-rebuild switch`).
   - Flakes and modern nix commands are enabled.
   - `services.envfs.enable = true` is active (resolves `/bin/bash` dynamically).

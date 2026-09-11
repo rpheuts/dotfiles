@@ -6,6 +6,7 @@
     ../../modules/common.nix
     ../../modules/desktop.nix
     ../../modules/llm.nix
+    ../../modules/gaming.nix
   ];
 
   # Machine Hostname
