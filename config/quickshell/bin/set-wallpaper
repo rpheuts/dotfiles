@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# set-wallpaper: manage wallpapers natively in Quickshell
+# Usage:
+#   set-wallpaper /path/to/image.webp
+#   set-wallpaper --next (or just set-wallpaper) to cycle
+
+WALLPAPER_DIR="$HOME/.config/quickshell/wallpapers"
+CURRENT_LINK="$HOME/.config/quickshell/current_wallpaper"
+
+if [[ "$1" == "--next" || -z "$1" ]]; then
+    mapfile -t walls < <(find "$WALLPAPER_DIR" -type f \( -name "*.webp" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) | sort)
+    if [[ ${#walls[@]} -eq 0 ]]; then
+        echo "No wallpapers found in $WALLPAPER_DIR" >&2
+        exit 1
+    fi
+    current=$(readlink -f "$CURRENT_LINK" 2>/dev/null)
+    next_index=0
+    for i in "${!walls[@]}"; do
+        if [[ "${walls[$i]}" == "$current" ]]; then
+            next_index=$(( (i + 1) % ${#walls[@]} ))
+            break
+        fi
+    done
+    target="${walls[$next_index]}"
+else
+    target="$(realpath "$1")"
+fi
+
+if [[ ! -f "$target" ]]; then
+    echo "Wallpaper file not found: $target" >&2
+    exit 1
+fi
+
+ln -sf "$target" "$CURRENT_LINK"
+quickshell ipc call background set "$target" 2>/dev/null || true
+echo "Wallpaper set to: $(basename "$target")"

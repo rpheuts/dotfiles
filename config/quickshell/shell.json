@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "bar": {
+    "position": "top",
+    "transparent": false,
+    "centerAnchor": "omarchy.clock",
+    "layout": {
+      "left": [
+        { "id": "omarchy.workspaces" }
+      ],
+      "center": [
+        { "id": "omarchy.clock", "format": "dddd HH:mm" }
+      ],
+      "right": [
+        { "id": "omarchy.monitor" },
+        { "id": "omarchy.power" },
+        { "id": "omarchy.audio" },
+        { "id": "omarchy.network" }
+      ]
+    }
+  },
+  "plugins": [
+    "omarchy.bar",
+    "omarchy.workspaces",
+    "omarchy.clock",
+    "omarchy.monitor",
+    "omarchy.power",
+    "omarchy.audio",
+    "omarchy.network",
+    "omarchy.background"
+  ]
+}

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# If agy-overlay is not running, spawn it into the special workspace with centered proportions
+if ! hyprctl clients -j | jq -e '.[] | select(.class == "agy-overlay")' >/dev/null 2>&1; then
+    hyprctl dispatch 'hl.dsp.exec_cmd("kitty --class agy-overlay -o remember_window_size=no -o initial_window_width=1150 -o initial_window_height=680 -e agy")'
+    sleep 0.2
+fi
+
+# Toggle visibility of the special:agent workspace
+hyprctl dispatch 'hl.dsp.workspace.toggle_special("agent")'

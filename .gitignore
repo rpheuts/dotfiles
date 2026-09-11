@@ -1,0 +1,9 @@
+# Quickshell runtime state
+config/quickshell/current_wallpaper
+
+# Editor & backup files
+*.swp
+*~
+*.bak
+*.orig
+.DS_Store
