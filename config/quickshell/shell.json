@@ -5,11 +5,12 @@
     "transparent": false,
     "centerAnchor": "omarchy.clock",
     "layout": {
-      "left": [],
-      "center": [
+      "left": [
         {
           "id": "omarchy.workspaces"
-        },
+        }
+      ],
+      "center": [
         {
           "id": "omarchy.clock",
           "format": "dddd HH:mm"
