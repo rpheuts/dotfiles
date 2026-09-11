@@ -1,6 +1,6 @@
 configuration {
     modi: "drun,run,window";
-    font: "JetBrainsMono Nerd Font 12";
+    font: "JetBrainsMono Nerd Font 11";
     show-icons: true;
     icon-theme: "Papirus-Dark";
     display-drun: "󰀻  Apps";
@@ -14,14 +14,27 @@ configuration {
 }
 
 * {
-    bg-col: rgba(26, 27, 38, 0.82);
-    bg-col-light: rgba(36, 40, 59, 0.70);
-    border-col: rgba(202, 204, 204, 0.60);
-    selected-col: rgba(65, 72, 104, 0.65);
+    /* Base dark palette matching Kitty & Hyprland frosted aesthetics */
+    bg-col: rgba(20, 21, 30, 0.85);
+    bg-col-light: rgba(30, 32, 48, 0.60);
+    border-col: rgba(202, 204, 204, 0.35);
+    border-focus: rgba(202, 204, 204, 0.80);
+    selected-col: rgba(55, 62, 90, 0.70);
     blue: #7aa2f7;
     fg-col: #c0caf5;
     fg-col2: #ffffff;
     grey: #737aa2;
+
+    /* Override Rofi builtin light-theme fallbacks */
+    background: transparent;
+    background-color: transparent;
+    foreground: @fg-col;
+    normal-background: transparent;
+    normal-foreground: @fg-col;
+    alternate-normal-background: transparent;
+    alternate-normal-foreground: @fg-col;
+    selected-normal-background: @selected-col;
+    selected-normal-foreground: @fg-col2;
 
     width: 620px;
     font: "JetBrainsMono Nerd Font 11";
@@ -33,24 +46,24 @@ element-text, element-icon, mode-switcher {
 }
 
 window {
-    height: 420px;
+    height: 430px;
     border: 1px;
     border-color: @border-col;
-    border-radius: 10px;
+    border-radius: 12px;
     background-color: @bg-col;
 }
 
 mainbox {
     background-color: transparent;
-    padding: 16px;
+    padding: 18px;
 }
 
 inputbar {
-    children: [prompt,entry];
+    children: [prompt, entry];
     background-color: @bg-col-light;
     border-radius: 8px;
     padding: 8px 12px;
-    margin: 0px 0px 12px 0px;
+    margin: 0px 0px 14px 0px;
     border: 1px;
     border-color: @border-col;
 }
@@ -59,7 +72,7 @@ prompt {
     background-color: transparent;
     padding: 2px 8px 2px 2px;
     text-color: @blue;
-    font: "JetBrainsMono Nerd Font Bold 12";
+    font: "JetBrainsMono Nerd Font Bold 11";
 }
 
 entry {
@@ -80,31 +93,79 @@ listview {
 }
 
 element {
-    padding: 8px 12px;
+    padding: 9px 12px;
     background-color: transparent;
     text-color: @fg-col;
     border-radius: 6px;
+    spacing: 12px;
 }
 
 element-icon {
     size: 24px;
-    margin: 0px 12px 0px 0px;
+    vertical-align: 0.5;
 }
 
-element selected {
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}
+
+/* Explicit state styling to eliminate white elements */
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg-col;
+}
+
+element normal.urgent {
+    background-color: rgba(247, 118, 142, 0.15);
+    text-color: #f7768e;
+}
+
+element normal.active {
+    background-color: rgba(122, 162, 247, 0.15);
+    text-color: @blue;
+}
+
+element selected.normal {
     background-color: @selected-col;
     text-color: @fg-col2;
     border: 1px;
-    border-color: @border-col;
+    border-color: @border-focus;
+}
+
+element selected.urgent {
+    background-color: rgba(247, 118, 142, 0.35);
+    text-color: #f7768e;
+}
+
+element selected.active {
+    background-color: rgba(122, 162, 247, 0.35);
+    text-color: @blue;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg-col;
+}
+
+element alternate.urgent {
+    background-color: rgba(247, 118, 142, 0.15);
+    text-color: #f7768e;
+}
+
+element alternate.active {
+    background-color: rgba(122, 162, 247, 0.15);
+    text-color: @blue;
 }
 
 mode-switcher {
     spacing: 8px;
     margin: 12px 0px 0px 0px;
+    background-color: transparent;
 }
 
 button {
-    padding: 6px 12px;
+    padding: 7px 14px;
     background-color: @bg-col-light;
     text-color: @grey;
     vertical-align: 0.5; 
@@ -117,5 +178,6 @@ button {
 button selected {
     background-color: @selected-col;
     text-color: @blue;
-    border-color: @border-col;
+    border: 1px;
+    border-color: @border-focus;
 }
