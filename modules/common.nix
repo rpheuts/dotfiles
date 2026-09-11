@@ -53,6 +53,13 @@
   services.power-profiles-daemon.enable = true;
   services.envfs.enable = true;
 
+  # Enable nix-ld to seamlessly run generic unpatched dynamic binaries (e.g. agy CLI)
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+  ];
+
   # Nix Package Manager & Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
