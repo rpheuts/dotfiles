@@ -9,13 +9,15 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  # Desktop Shell
+  # Desktop Shell & Launcher
   environment.systemPackages = with pkgs; [
     quickshell
+    rofi
+    papirus-icon-theme
   ];
 
   # Graphical Greeter (ReGreet + greetd)
-  programs.regreet = {
+  services.displayManager.regreet = {
     enable = true;
     settings = {
       background = {

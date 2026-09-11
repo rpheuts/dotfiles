@@ -1,0 +1,121 @@
+configuration {
+    modi: "drun,run,window";
+    font: "JetBrainsMono Nerd Font 12";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    display-drun: "󰀻  Apps";
+    display-run: "󰌧  Run";
+    display-window: "󱂬  Windows";
+    drun-display-format: "{name}";
+    window-format: "{w} · {c} · {t}";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+
+* {
+    bg-col: rgba(26, 27, 38, 0.82);
+    bg-col-light: rgba(36, 40, 59, 0.70);
+    border-col: rgba(202, 204, 204, 0.60);
+    selected-col: rgba(65, 72, 104, 0.65);
+    blue: #7aa2f7;
+    fg-col: #c0caf5;
+    fg-col2: #ffffff;
+    grey: #737aa2;
+
+    width: 620px;
+    font: "JetBrainsMono Nerd Font 11";
+}
+
+element-text, element-icon, mode-switcher {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+window {
+    height: 420px;
+    border: 1px;
+    border-color: @border-col;
+    border-radius: 10px;
+    background-color: @bg-col;
+}
+
+mainbox {
+    background-color: transparent;
+    padding: 16px;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @bg-col-light;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 0px 0px 12px 0px;
+    border: 1px;
+    border-color: @border-col;
+}
+
+prompt {
+    background-color: transparent;
+    padding: 2px 8px 2px 2px;
+    text-color: @blue;
+    font: "JetBrainsMono Nerd Font Bold 12";
+}
+
+entry {
+    padding: 2px;
+    text-color: @fg-col;
+    background-color: transparent;
+    placeholder: "Search applications or commands...";
+    placeholder-color: @grey;
+}
+
+listview {
+    border: 0px;
+    padding: 4px 0px 0px;
+    columns: 1;
+    lines: 7;
+    background-color: transparent;
+    spacing: 4px;
+}
+
+element {
+    padding: 8px 12px;
+    background-color: transparent;
+    text-color: @fg-col;
+    border-radius: 6px;
+}
+
+element-icon {
+    size: 24px;
+    margin: 0px 12px 0px 0px;
+}
+
+element selected {
+    background-color: @selected-col;
+    text-color: @fg-col2;
+    border: 1px;
+    border-color: @border-col;
+}
+
+mode-switcher {
+    spacing: 8px;
+    margin: 12px 0px 0px 0px;
+}
+
+button {
+    padding: 6px 12px;
+    background-color: @bg-col-light;
+    text-color: @grey;
+    vertical-align: 0.5; 
+    horizontal-align: 0.5;
+    border-radius: 6px;
+    border: 1px;
+    border-color: transparent;
+}
+
+button selected {
+    background-color: @selected-col;
+    text-color: @blue;
+    border-color: @border-col;
+}
