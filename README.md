@@ -15,9 +15,17 @@ Personal configuration repository for NixOS, Hyprland, Quickshell, Kitty, and An
 
 ```text
 dotfiles/
-├── nixos/
-│   ├── configuration.nix           # Main NixOS system configuration
-│   └── hardware-configuration.nix  # Hardware scan & kernel modules
+├── flake.nix                       # Multi-host Flake definition
+├── hosts/
+│   ├── flow-z13/                   # ASUS Flow Z13 (Strix Halo 128GB unified RAM)
+│   │   ├── default.nix
+│   │   └── hardware-configuration.nix
+│   └── template/                   # Template for other machines (no heavy AI stack)
+│       └── default.nix
+├── modules/
+│   ├── common.nix                  # Core OS, users, audio, power, containers
+│   ├── desktop.nix                 # Hyprland, greeter (regreet/greetd), locks, fonts
+│   └── llm.nix                     # Local AI: Vulkan llama.cpp (MTP support) & Ollama
 ├── config/
 │   ├── hypr/
 │   │   ├── hyprland.lua            # Hyprland bindings, rules & blur
@@ -48,24 +56,40 @@ To link all dotfiles and system configurations to their expected locations:
 ```bash
 git clone <repo-url> ~/dotfiles
 cd ~/dotfiles
-./install.sh
+./install.sh flow-z13    # Or your specific host name
 ```
 
 ## Workflow & Common Tasks
 
-### 1. System Changes & Software Installation
-Edit `nixos/configuration.nix` and rebuild:
+### 1. System Changes & Rebuilding
+Edit files in `modules/` or `hosts/<hostname>/`, then rebuild:
 ```bash
-sudo nixos-rebuild switch
+sudo nixos-rebuild switch --flake ~/dotfiles
 ```
 
-### 2. Window Manager & Styling
+### 2. Local LLMs & Speculative Decoding (Flow Z13)
+- **Ollama (Vulkan-accelerated)**:
+  Runs automatically on `127.0.0.1:11434`.
+  ```bash
+  ollama run qwen2.5:32b
+  ```
+- **llama.cpp with Vulkan & MTP (Multiple Token Prediction)**:
+  Run Qwen with MTP using the helper launcher:
+  ```bash
+  llama-serve-vulkan /path/to/qwen-3.8.gguf --spec-type draft-mtp -c 8192
+  ```
+  Or run directly with `llama-cli`:
+  ```bash
+  llama-cli -m /path/to/model.gguf --device Vulkan0 -ngl 99 --spec-type draft-mtp -p "Hello!"
+  ```
+
+### 3. Window Manager & Styling
 Edit `config/hypr/hyprland.lua` and apply immediately:
 ```bash
 hyprctl reload
 ```
 
-### 3. Desktop Shell & Wallpapers
+### 4. Desktop Shell & Wallpapers
 - Switch or cycle wallpapers:
   ```bash
   set-wallpaper /path/to/image.png

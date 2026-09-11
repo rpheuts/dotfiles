@@ -95,3 +95,15 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
   - Locks screen via `loginctl lock-session` before system suspend or lid close.
   - Idle timeouts: 5m lock, 6m display off, 30m suspend.
 
+## 8. Local LLM Architecture (Flow Z13 / Strix Halo 128GB)
+- **Hardware Profile**: AMD Strix Halo APU (Radeon 8060S / RDNA 3.5) with 128GB unified memory (~66GB+ VRAM allocatable to Vulkan/ROCm).
+- **Vulkan Acceleration**:
+  - `llama-cpp` compiled with `vulkanSupport = true` (`llama-server`, `llama-cli`, `llama-bench`).
+  - Devices: `Vulkan0` (RADV STRIX_HALO). Vulkan avoids GPU fence lockups and compositor stutter on Wayland.
+  - Multi-Token Prediction (MTP) / Speculative Decoding: `--spec-type draft-mtp` supported natively.
+  - Helper launcher: `llama-serve-vulkan <model.gguf> [args...]`
+- **Ollama Service**:
+  - `services.ollama.enable = true` running `ollama-vulkan` on port 11434 (swappable to `ollama-rocm` in `modules/llm.nix`).
+- **Host Separation**:
+  - `modules/llm.nix` is only imported on `hosts/flow-z13/`. Other hosts omit it to avoid heavy compute overhead.
+

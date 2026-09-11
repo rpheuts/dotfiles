@@ -19,14 +19,17 @@ ln -sfn "$DOTFILES_DIR/skills/nixos-desktop" "$HOME/.gemini/config/skills/nixos-
 
 # Symlink NixOS system configuration (requires sudo)
 if [ -d "/etc/nixos" ]; then
-    echo "--> Linking NixOS system configuration..."
-    sudo ln -sfn "$DOTFILES_DIR/nixos/configuration.nix" "/etc/nixos/configuration.nix"
-    sudo ln -sfn "$DOTFILES_DIR/nixos/hardware-configuration.nix" "/etc/nixos/hardware-configuration.nix"
+    HOST="${1:-flow-z13}"
+    echo "--> Linking NixOS system configuration for host: $HOST..."
+    sudo ln -sfn "$DOTFILES_DIR/hosts/$HOST/default.nix" "/etc/nixos/configuration.nix"
+    if [ -f "$DOTFILES_DIR/hosts/$HOST/hardware-configuration.nix" ]; then
+        sudo ln -sfn "$DOTFILES_DIR/hosts/$HOST/hardware-configuration.nix" "/etc/nixos/hardware-configuration.nix"
+    fi
 fi
 
 # Ensure user directory has proper traversal permissions for Nix builds
 chmod 755 "$HOME"
 
 echo "==> Dotfiles setup complete!"
-echo "To apply NixOS changes:  sudo nixos-rebuild switch"
+echo "To apply NixOS changes:  sudo nixos-rebuild switch --flake ~/dotfiles"
 echo "To reload Hyprland:      hyprctl reload"

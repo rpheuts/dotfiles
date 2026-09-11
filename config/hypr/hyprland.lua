@@ -45,6 +45,7 @@ local browser     = "chromium"
 -------------------
 
 hl.on("hyprland.start", function ()
+      hl.exec_cmd("systemctl --user start nixos-fake-graphical-session.target")
       hl.exec_cmd("quickshell")
       hl.exec_cmd("hypridle")
 end)
