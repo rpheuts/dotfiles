@@ -41,6 +41,7 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
   - `Super + Return`: Terminal (`kitty`)
   - `Super + W`: Close active window
   - `Super + B`: Browser (`chromium`)
+  - `Super + R` / `Super + Space`: Application launcher (`rofi`)
   - `Super + A`: Toggle persistent AGY CLI slide-in overlay (`special:agent`)
   - `Super + L`: Lock screen immediately (`hyprlock`)
   - `Super + Shift + W`: Cycle to next wallpaper
