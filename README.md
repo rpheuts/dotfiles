@@ -8,6 +8,7 @@ Personal configuration repository for NixOS, Hyprland, Quickshell, Kitty, and An
 - **Window Manager**: [Hyprland](https://hyprland.org) (configured in Lua: `~/.config/hypr/hyprland.lua`)
 - **Desktop Shell**: [Quickshell](https://quickshell.outfoxxed.me) (modular top bar & wallpaper engine in `~/.config/quickshell/`)
 - **Terminal**: [Kitty](https://sw.kovidgoyal.net/kitty/) with JetBrainsMono Nerd Font & frosted glass opacity
+- **Containers**: Rootless [Podman](https://podman.io) & [Distrobox](https://distrobox.it) for mutable distribution environments
 - **AI Agent Integration**: [Antigravity](https://github.com/google-deepmind) CLI (`agy`) persistent scratchpad overlay on `Super + A`
 
 ## Repository Structure

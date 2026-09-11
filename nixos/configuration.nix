@@ -104,7 +104,15 @@
 
   programs.hyprland.enable = true;
 
+  # Enable Podman for rootless containerization (Distrobox backend)
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
   environment.systemPackages = with pkgs; [
+    distrobox
+    xhost
     gh
     git
     kitty

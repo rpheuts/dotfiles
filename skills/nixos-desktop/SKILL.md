@@ -28,6 +28,8 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
   nix profile add nixpkgs#<pkg>
   ```
 
+- **Containers & Distrobox**: Podman is enabled rootless (`dockerCompat = true`). Distrobox (`distrobox create`, `distrobox enter`) is available for mutable dev containers and running non-NixOS distributions.
+
 ## 3. Hyprland Configuration
 - **Configuration File**: `~/.config/hypr/hyprland.lua`
 - **Syntax**: Lua configuration (`hl.config`, `hl.bind`, `hl.window_rule`, `hl.animation`).

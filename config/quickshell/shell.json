@@ -5,17 +5,29 @@
     "transparent": false,
     "centerAnchor": "omarchy.clock",
     "layout": {
-      "left": [
-        { "id": "omarchy.workspaces" }
-      ],
+      "left": [],
       "center": [
-        { "id": "omarchy.clock", "format": "dddd HH:mm" }
+        {
+          "id": "omarchy.workspaces"
+        },
+        {
+          "id": "omarchy.clock",
+          "format": "dddd HH:mm"
+        }
       ],
       "right": [
-        { "id": "omarchy.monitor" },
-        { "id": "omarchy.power" },
-        { "id": "omarchy.audio" },
-        { "id": "omarchy.network" }
+        {
+          "id": "omarchy.monitor"
+        },
+        {
+          "id": "omarchy.power"
+        },
+        {
+          "id": "omarchy.audio"
+        },
+        {
+          "id": "omarchy.network"
+        }
       ]
     }
   },
