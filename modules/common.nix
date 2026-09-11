@@ -76,6 +76,12 @@
     dockerCompat = true;
   };
 
+  # Distrobox configuration: Isolate container home directories
+  environment.etc."distrobox/distrobox.conf".text = ''
+    # Automatically isolate container home directories to avoid host profile contamination
+    container_home_prefix="''${HOME}/.distrobox"
+  '';
+
   # Common System Packages
   environment.systemPackages = with pkgs; [
     distrobox
