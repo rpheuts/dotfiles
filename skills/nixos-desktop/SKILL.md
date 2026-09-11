@@ -28,7 +28,7 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
   nix profile add nixpkgs#<pkg>
   ```
 
-- **Containers & Distrobox**: Podman is enabled rootless (`dockerCompat = true`). Distrobox (`distrobox create`, `distrobox enter`) is available for mutable dev containers and running non-NixOS distributions.
+- **Containers & Distrobox**: Podman is enabled rootless (`dockerCompat = true`). Distrobox containers use home isolation (`container_home_prefix = "${HOME}/.distrobox"` in `/etc/distrobox/distrobox.conf` and `~/.config/distrobox/distrobox.conf`), isolating all container dotfiles, profiles, and binaries to `~/.distrobox/<name>/` while providing access to host files at `/home/rpheuts` (`$DISTROBOX_HOST_HOME`).
 
 ## 3. Hyprland Configuration
 - **Configuration File**: `~/.config/hypr/hyprland.lua`
