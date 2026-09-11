@@ -14,6 +14,7 @@
   - Desktop Shell: Custom modular Quickshell top bar and widgets in `~/.config/quickshell/`.
   - Wallpapers: Managed natively by Quickshell via `~/.config/quickshell/bin/set-wallpaper` with images in `~/.config/quickshell/wallpapers/`.
   - Agent Overlay: Toggled via `Super + A` (`special:agent` scratchpad running Kitty with `agy`).
+  - Login & Screen Lock: ReGreet (GTK4 / greetd) on boot; Hyprlock + Hypridle on sleep, lid close, and idle (`Super + L` to lock).
 - **Terminal & Aesthetics**:
   - Terminal: Kitty (`~/.config/kitty/kitty.conf`) with 82% background opacity and JetBrainsMono Nerd Font.
   - Compositor: Frosted glass Gaussian blur on transparent surfaces (`blur.special = true`, `dim_special = 0.3`).

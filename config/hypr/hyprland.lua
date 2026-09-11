@@ -46,6 +46,7 @@ local browser     = "chromium"
 
 hl.on("hyprland.start", function ()
       hl.exec_cmd("quickshell")
+      hl.exec_cmd("hypridle")
 end)
 
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
@@ -277,6 +278,7 @@ hl.bind(mainMod .. " + W", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("set-wallpaper --next"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("agy-toggle"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)

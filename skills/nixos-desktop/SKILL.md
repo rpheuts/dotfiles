@@ -40,6 +40,7 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
   - `Super + W`: Close active window
   - `Super + B`: Browser (`chromium`)
   - `Super + A`: Toggle persistent AGY CLI slide-in overlay (`special:agent`)
+  - `Super + L`: Lock screen immediately (`hyprlock`)
   - `Super + Shift + W`: Cycle to next wallpaper
 - **Aesthetic Styling**:
   - Gaps: `gaps_in = 3`, `gaps_out = 6`
@@ -80,3 +81,15 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
 - **Toggle Script**: `~/.config/quickshell/bin/agy-toggle`
 - **Hyprland Workspace**: `special:agent`
 - **Window Class**: `agy-overlay` (size: 1150x680, centered)
+
+## 7. Login Manager & Screen Locking
+- **Boot / Cold Start Login**: `greetd` with `regreet` (GTK4 Wayland greeter running inside `cage`).
+  - Wallpaper: `/etc/greetd/wallpaper.png`
+  - Sessions discovered via `environment.pathsToLink = [ "/share/wayland-sessions" ];`
+- **Lock Screen**: `hyprlock` (`~/.config/hypr/hyprlock.conf`).
+  - Frosted glass blur over dynamic `~/.config/quickshell/current_wallpaper`.
+  - Manual lock shortcut: `Super + L`
+- **Idle & Sleep Daemon**: `hypridle` (`~/.config/hypr/hypridle.conf`).
+  - Locks screen via `loginctl lock-session` before system suspend or lid close.
+  - Idle timeouts: 5m lock, 6m display off, 30m suspend.
+

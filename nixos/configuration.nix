@@ -75,9 +75,32 @@
     ];
   };
 
-  #services.displayManager.sddm.enable = true;
-  #services.displayManager.sddm.wayland.enable = true;
-  #services.displayManager.defaultSession = "hyprland";
+  # Graphical login manager via greetd + regreet (Wayland greeter)
+  programs.regreet = {
+    enable = true;
+    settings = {
+      background = {
+        path = "/etc/greetd/wallpaper.png";
+        fit = "Cover";
+      };
+      GTK = {
+        application_prefer_dark_theme = true;
+      };
+      commands = {
+        reboot = [ "systemctl" "reboot" ];
+        poweroff = [ "systemctl" "poweroff" ];
+      };
+    };
+  };
+
+  # Provide login screen wallpaper
+  environment.etc."greetd/wallpaper.png".source = ../config/quickshell/wallpapers/quattro.png;
+
+  # Ensure Wayland desktop sessions are discoverable by greeters
+  environment.pathsToLink = [ "/share/wayland-sessions" ];
+
+  # Screen locker and idle daemon (graphical lock on sleep/resume & timeout)
+  programs.hyprlock.enable = true;
 
   programs.hyprland.enable = true;
 

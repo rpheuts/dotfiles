@@ -19,7 +19,9 @@ dotfiles/
 │   └── hardware-configuration.nix  # Hardware scan & kernel modules
 ├── config/
 │   ├── hypr/
-│   │   └── hyprland.lua            # Hyprland bindings, rules & blur
+│   │   ├── hyprland.lua            # Hyprland bindings, rules & blur
+│   │   ├── hyprlock.conf           # Lock screen styling & geometry
+│   │   └── hypridle.conf           # Idle & suspend lock timeouts
 │   ├── kitty/
 │   │   └── kitty.conf              # Terminal font, opacity & keymaps
 │   └── quickshell/
@@ -69,3 +71,4 @@ hyprctl reload
   set-wallpaper --next      # Or press Super + Shift + W
   ```
 - Toggle AGY overlay: `Super + A`
+- Lock screen: `Super + L` (or automatic on sleep / 5m idle)
