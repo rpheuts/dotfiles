@@ -13,10 +13,11 @@ This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (
 - **Autonomous Execution**: You have permission to directly execute `sudo` commands, install software, edit system files, and rebuild the system without waiting for password prompts.
 - **Shebang Resolution**: `services.envfs.enable = true` is active, allowing standard `#!/bin/bash` scripts to execute cleanly.
 
-## 2. NixOS Configuration & Software Installation
-- **Configuration File**: `/etc/nixos/configuration.nix`
-- **Standard System Packages**: Add to `environment.systemPackages = with pkgs; [ ... ];` in `/etc/nixos/configuration.nix`.
-- **System Services**: Configure declaratively in `/etc/nixos/configuration.nix` (e.g. `services.upower.enable = true;`).
+## 2. NixOS Configuration & Dotfiles Repository
+- **Central Repository**: `~/dotfiles` (Git repository containing NixOS system config, desktop configs, and AGY skills).
+- **Configuration File**: `/etc/nixos/configuration.nix` (symlinked to `~/dotfiles/nixos/configuration.nix`).
+- **Standard System Packages**: Add to `environment.systemPackages = with pkgs; [ ... ];` in `~/dotfiles/nixos/configuration.nix`.
+- **System Services**: Configure declaratively in `~/dotfiles/nixos/configuration.nix` (e.g. `services.upower.enable = true;`).
 - **Rebuilding the System**:
   ```bash
   sudo nixos-rebuild switch
