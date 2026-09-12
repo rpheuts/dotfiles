@@ -5,7 +5,7 @@ description: Comprehensive knowledge, guidelines, and procedures for administeri
 
 # NixOS & Hyprland Desktop Administration Guide
 
-This system is an AMD-powered Linux laptop running **NixOS** with **Hyprland** (Lua configuration) and a custom modular **Quickshell** desktop environment.
+This workstation environment runs **NixOS** with **Hyprland** (Lua configuration) and a custom modular **Quickshell** desktop environment across multi-host laptops (`hosts/flow-z13` and `hosts/book3`).
 
 ## 1. System Environment & Privileges
 - **Operating System**: NixOS (26.05 / unstable) with `flakes` and `nix-command` enabled.

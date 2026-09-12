@@ -20,6 +20,9 @@ dotfiles/
 │   ├── flow-z13/                   # ASUS Flow Z13 (Strix Halo 128GB unified RAM)
 │   │   ├── default.nix
 │   │   └── hardware-configuration.nix
+│   ├── book3/                      # Samsung Galaxy Book3 Pro 14" (Intel i5-1340P, ALC298)
+│   │   ├── default.nix
+│   │   └── hardware-configuration.nix
 │   └── template/                   # Template for other machines (no heavy AI stack)
 │       └── default.nix
 ├── modules/
@@ -56,7 +59,7 @@ To link all dotfiles and system configurations to their expected locations:
 ```bash
 git clone <repo-url> ~/dotfiles
 cd ~/dotfiles
-./install.sh flow-z13    # Or your specific host name
+./install.sh book3       # Or flow-z13 / template
 ```
 
 ## Workflow & Common Tasks
