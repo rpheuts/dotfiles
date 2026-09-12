@@ -98,6 +98,7 @@
     jq
     inotify-tools
     wireplumber
+    python3
   ];
 
   system.stateVersion = "26.05";

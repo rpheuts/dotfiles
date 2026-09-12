@@ -18,6 +18,9 @@
       ],
       "right": [
         {
+          "id": "stappmus.activity-monitor"
+        },
+        {
           "id": "omarchy.monitor"
         },
         {
@@ -36,6 +39,7 @@
     "omarchy.bar",
     "omarchy.workspaces",
     "omarchy.clock",
+    "stappmus.activity-monitor",
     "omarchy.monitor",
     "omarchy.power",
     "omarchy.audio",
