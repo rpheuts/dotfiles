@@ -76,6 +76,10 @@
     dockerCompat = true;
   };
 
+  virtualisation.containers.registries.settings = {
+    unqualified-search-registries = [ "docker.io" "quay.io" ];
+  };
+
   # Distrobox configuration: Isolate container home directories
   environment.etc."distrobox/distrobox.conf".text = ''
     # Automatically isolate container home directories to avoid host profile contamination

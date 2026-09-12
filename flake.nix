@@ -29,14 +29,17 @@
         ];
       };
 
-      # Secondary Laptop (General Desktop & Development)
-      laptop = nixpkgs.lib.nixosSystem {
+      # Samsung Galaxy Book3 Pro 14" (Intel Core i5-1340P, ALC298)
+      book3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/laptop
+          ./hosts/book3
         ];
       };
+
+      # Backward-compatible alias matching hostname before switch
+      laptop = self.nixosConfigurations.book3;
     };
   };
 }
