@@ -100,6 +100,7 @@
     wireplumber
     python3
     pi-coding-agent
+    vscodium
   ];
 
   system.stateVersion = "26.05";
