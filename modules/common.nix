@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Bootloader
@@ -84,6 +84,7 @@
 
   # Common System Packages
   environment.systemPackages = with pkgs; [
+    inputs.antigravity-nix.packages.${pkgs.system}.google-antigravity-cli
     distrobox
     xhost
     gh
