@@ -22,6 +22,14 @@
           ./hosts/flow-z13
         ];
       };
+
+      # Secondary Laptop (General Desktop & Development)
+      laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/laptop
+        ];
+      };
     };
   };
 }
