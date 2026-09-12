@@ -99,6 +99,7 @@
     inotify-tools
     wireplumber
     python3
+    pi-coding-agent
   ];
 
   system.stateVersion = "26.05";
