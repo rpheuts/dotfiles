@@ -53,6 +53,9 @@
   services.power-profiles-daemon.enable = true;
   services.envfs.enable = true;
 
+  # Secret Service & Keyring (for Mailspring, Chromium, VS Code, etc.)
+  services.gnome.gnome-keyring.enable = true;
+
   # Enable nix-ld to seamlessly run generic unpatched dynamic binaries (e.g. agy CLI)
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [

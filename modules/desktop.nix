@@ -31,6 +31,7 @@
     quickshell
     rofi
     papirus-icon-theme
+    seahorse
   ];
 
   # Graphical Greeter (ReGreet + greetd)
@@ -50,6 +51,9 @@
       };
     };
   };
+
+  # Automatically unlock GNOME Keyring on graphical login via greetd
+  security.pam.services.greetd.enableGnomeKeyring = true;
 
   # Provide login screen wallpaper asset
   environment.etc."greetd/wallpaper.png".source = ../config/quickshell/wallpapers/quattro.png;
