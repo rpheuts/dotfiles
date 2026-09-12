@@ -13,6 +13,12 @@
 
   boot.supportedFilesystems = [ "btrfs" ];
 
+  # Intel Iris Xe Hardware Video Acceleration (VA-API)
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-media-driver
+    libvdpau-va-gl
+  ];
+
   # Samsung Galaxy Book3 Pro speaker amplifier quirk (Realtek ALC298 quad-speaker setup)
   boot.extraModprobeConfig = ''
     options snd_sof_intel_hda_generic hda_model=alc298-samsung-amp-v2-4-amps

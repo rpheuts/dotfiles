@@ -2,26 +2,47 @@
 
 # set-wallpaper: manage wallpapers natively in Quickshell
 # Usage:
-#   set-wallpaper /path/to/image.webp
-#   set-wallpaper --next (or just set-wallpaper) to cycle
+#   set-wallpaper /path/to/media
+#   set-wallpaper --next (or just set-wallpaper) to cycle forward
+#   set-wallpaper --prev to cycle backward
 
-WALLPAPER_DIR="$HOME/.config/quickshell/wallpapers"
+WALLPAPER_DIR="$(realpath "$HOME/.config/quickshell/wallpapers")"
 CURRENT_LINK="$HOME/.config/quickshell/current_wallpaper"
 
-if [[ "$1" == "--next" || -z "$1" ]]; then
-    mapfile -t walls < <(find "$WALLPAPER_DIR" -type f \( -name "*.webp" -o -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) | sort)
+if [[ "$1" == "--next" || "$1" == "--prev" || -z "$1" ]]; then
+    mapfile -t walls < <(find -L "$WALLPAPER_DIR" -maxdepth 1 -type f \( \
+        -iname "*.webp" -o \
+        -iname "*.png"  -o \
+        -iname "*.jpg"  -o \
+        -iname "*.jpeg" -o \
+        -iname "*.mp4"  -o \
+        -iname "*.m4v"  -o \
+        -iname "*.mov"  -o \
+        -iname "*.webm" -o \
+        -iname "*.mkv"  -o \
+        -iname "*.avi" \
+    \) | sort)
+
     if [[ ${#walls[@]} -eq 0 ]]; then
         echo "No wallpapers found in $WALLPAPER_DIR" >&2
         exit 1
     fi
-    current=$(readlink -f "$CURRENT_LINK" 2>/dev/null)
+
+    current=$(realpath "$CURRENT_LINK" 2>/dev/null)
     next_index=0
+
     for i in "${!walls[@]}"; do
-        if [[ "${walls[$i]}" == "$current" ]]; then
-            next_index=$(( (i + 1) % ${#walls[@]} ))
+        wall_real=$(realpath "${walls[$i]}" 2>/dev/null)
+        if [[ "$wall_real" == "$current" || "${walls[$i]}" == "$current" || "$(basename "${walls[$i]}")" == "$(basename "$current")" ]]; then
+            if [[ "$1" == "--prev" ]]; then
+                next_index=$(( (i - 1 + ${#walls[@]}) % ${#walls[@]} ))
+            else
+                next_index=$(( (i + 1) % ${#walls[@]} ))
+            fi
             break
         fi
     done
+
     target="${walls[$next_index]}"
 else
     target="$(realpath "$1")"
@@ -32,6 +53,6 @@ if [[ ! -f "$target" ]]; then
     exit 1
 fi
 
-ln -sf "$target" "$CURRENT_LINK"
+ln -sfn "$target" "$CURRENT_LINK"
 quickshell ipc call background set "$target" 2>/dev/null || true
 echo "Wallpaper set to: $(basename "$target")"
