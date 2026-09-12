@@ -6,23 +6,31 @@ let
     vulkanSupport = true;
   };
 
-  # Helper script to launch llama-server with Vulkan offloading & optional MTP
+  # Helper script to launch llama-server with Vulkan offloading & MTP
   llama-serve-vulkan = pkgs.writeShellScriptBin "llama-serve-vulkan" ''
     #!/usr/bin/env bash
     set -euo pipefail
-    if [ $# -lt 1 ]; then
-      echo "Usage: llama-serve-vulkan <path-to-model.gguf> [extra llama-server flags...]"
-      echo "Example with MTP:"
-      echo "  llama-serve-vulkan ./qwen-3.8.gguf --spec-type draft-mtp -c 8192"
+    DEFAULT_MODEL="/home/rpheuts/Downloads/Qwen3.8-27B-Q6_K_L.gguf"
+    MODEL="''${1:-$DEFAULT_MODEL}"
+    if [ $# -ge 1 ]; then shift; fi
+
+    if [ ! -f "$MODEL" ]; then
+      echo "Error: Model file not found at: $MODEL"
+      echo "Usage: llama-serve-vulkan [path-to-model.gguf] [extra llama-server flags...]"
       exit 1
     fi
-    MODEL="$1"
-    shift
-    echo "==> Starting llama-server with Vulkan acceleration on Strix Halo..."
+
+    echo "==> Starting local LLM server with Vulkan acceleration & MTP on Strix Halo..."
+    echo "==> Model: $MODEL"
+    echo "==> API:    http://127.0.0.1:8080/v1/chat/completions"
+    echo "==> Web UI: http://127.0.0.1:8080"
     exec ${llama-cpp-vulkan}/bin/llama-server \
       --model "$MODEL" \
       --device Vulkan0 \
       --n-gpu-layers 99 \
+      --spec-type draft-mtp \
+      --alias "qwen,qwen3.8,default" \
+      --ctx-size 16384 \
       --port 8080 \
       --host 127.0.0.1 \
       "$@"
@@ -36,6 +44,18 @@ in
     pkgs.vulkan-tools       # vulkaninfo
     pkgs.clinfo
   ];
+
+  # On-demand systemd user service:
+  #   Start with: systemctl --user start qwen
+  #   Stop with:  systemctl --user stop qwen
+  systemd.user.services.qwen = {
+    description = "Local Qwen 3.8 27B LLM Server with Vulkan & MTP";
+    serviceConfig = {
+      ExecStart = "${llama-serve-vulkan}/bin/llama-serve-vulkan";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+  };
 
   # Ollama service (defaults to Vulkan; easily toggleable to pkgs.ollama-rocm)
   services.ollama = {
