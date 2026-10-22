@@ -2,8 +2,9 @@
 
 set -euo pipefail
 
-readonly helper=/usr/lib/stappmus-activity-monitor/activity-sampler
+readonly dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly helper="$dir/activity-sampler"
 
 [[ $# -eq 0 ]] || exit 64
 [[ -x $helper ]] || exit 77
-exec sudo -n /usr/lib/stappmus-activity-monitor/activity-sampler --activity-process-power-reader
+exec sudo -n "$helper" --activity-process-power-reader

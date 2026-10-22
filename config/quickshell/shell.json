@@ -17,7 +17,8 @@
       "center": [],
       "right": [
         {
-          "id": "stappmus.activity-monitor"
+          "id": "stappmus.activity-monitor",
+          "samplingSpeed": "Balanced"
         },
         {
           "id": "omarchy.monitor"
