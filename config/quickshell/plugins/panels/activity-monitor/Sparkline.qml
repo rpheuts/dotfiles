@@ -5,7 +5,7 @@ Canvas {
   id: root
 
   property var values: []
-  property color lineColor: Color.accent
+  property color lineColor: Colors.accent
   property color fillColor: Util.alpha(lineColor, 0.12)
   property real ceiling: 0
 

@@ -26,10 +26,10 @@ Panel {
   property Item searchField: null
   property var processViewport: null
 
-  readonly property color foreground: Color.popups.text
-  readonly property color accent: Color.accent
-  readonly property color urgent: Color.urgent
-  readonly property color dim: Color.muted
+  readonly property color foreground: Colors.popups.text
+  readonly property color accent: Colors.accent
+  readonly property color urgent: Colors.urgent
+  readonly property color dim: Colors.muted
   readonly property var snapshot: activity.snapshot
   readonly property var storageSnapshot: activity.storageSnapshot
   readonly property var gpuSnapshot: activity.gpuSnapshot
@@ -712,7 +712,7 @@ Panel {
           ? "Do you want to close " + processActions.pendingAction.name + "?"
           : ""
         confirmText: "Close"
-        background: Color.popups.background
+        background: Colors.popups.background
         foreground: root.foreground
         selectedText: root.accent
         fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
