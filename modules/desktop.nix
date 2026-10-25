@@ -32,6 +32,7 @@
     rofi
     papirus-icon-theme
     seahorse
+    wdisplays
   ];
 
   # Graphical Greeter (ReGreet + greetd)
