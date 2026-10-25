@@ -21,5 +21,6 @@
   boot.kernelParams = [
     "amdgpu.gttsize=102400"
     "amdgpu.no_system_mem_limit=1"
+    "amdgpu.dcfeaturemask=0x402"
   ];
 }
