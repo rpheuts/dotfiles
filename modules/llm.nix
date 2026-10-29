@@ -22,8 +22,8 @@ let
 
     echo "==> Starting local LLM server with Vulkan acceleration & MTP on Strix Halo..."
     echo "==> Model: $MODEL"
-    echo "==> API:    http://127.0.0.1:8080/v1/chat/completions"
-    echo "==> Web UI: http://127.0.0.1:8080"
+    echo "==> API:    http://0.0.0.0:8080/v1/chat/completions"
+    echo "==> Web UI: http://0.0.0.0:8080"
     exec ${llama-cpp-vulkan}/bin/llama-server \
       --model "$MODEL" \
       --device Vulkan0 \
@@ -32,11 +32,17 @@ let
       --alias "qwen,qwen3.8,default" \
       --ctx-size 16384 \
       --port 8080 \
-      --host 127.0.0.1 \
+      --host 0.0.0.0 \
       "$@"
   '';
 in
 {
+  # Firewall: Allow LAN devices to reach local LLM endpoints
+  networking.firewall.allowedTCPPorts = [
+    8080   # llama-server (Qwen)
+    11434  # Ollama
+  ];
+
   # System packages for local AI experimentation
   environment.systemPackages = [
     llama-cpp-vulkan
@@ -61,7 +67,7 @@ in
   services.ollama = {
     enable = true;
     package = pkgs.ollama-vulkan; # Toggle to pkgs.ollama-rocm for ROCm testing
-    host = "127.0.0.1";
+    host = "0.0.0.0";
     port = 11434;
   };
 }

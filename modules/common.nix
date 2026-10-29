@@ -12,6 +12,15 @@
   # Networking
   networking.networkmanager.enable = true;
 
+  # Remote access via SSH
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+    };
+  };
+
   # User management
   security.sudo.wheelNeedsPassword = false;
 
