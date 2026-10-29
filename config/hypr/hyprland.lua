@@ -334,6 +334,10 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
+-- Lid switch: lock session & turn off internal screen when keyboard closed; turn screen back on when opened
+hl.bind("switch:on:Lid Switch",  hl.dsp.exec_cmd("loginctl lock-session; sleep 0.2; hyprctl dispatch 'hl.dsp.dpms(\"off\", \"eDP-1\")'"), { locked = true })
+hl.bind("switch:off:Lid Switch", hl.dsp.dpms("on", "eDP-1"), { locked = true })
+
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----

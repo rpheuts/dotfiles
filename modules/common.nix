@@ -21,6 +21,13 @@
     };
   };
 
+  # Power & Lid switch behavior (suspend on battery, stay awake on AC power)
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
+
   # User management
   security.sudo.wheelNeedsPassword = false;
 
