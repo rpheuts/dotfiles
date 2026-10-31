@@ -11,6 +11,13 @@
 
   # Networking
   networking.networkmanager.enable = true;
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
+  # Tailscale VPN daemon
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both"; # Allows subnet routing and exit node usage
+  };
 
   # Remote access via SSH
   services.openssh = {
